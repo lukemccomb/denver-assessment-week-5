@@ -15,5 +15,9 @@ feature "logged out user can see homepage" do
     fill_in "Password:", with: "jeff123"
     click_on "Submit"
     expect(page).to have_content("Welcome, Jeff")
+    expect(page).to have_content("Log Out")
+    click_on "Log Out"
+    expect(page).to have_content("Log In")
+    expect(page).to have_content("Contacts")
   end
 end

@@ -38,4 +38,9 @@ class ContactsApp < Sinatra::Base
     redirect "/"
   end
 
+  get "/log_out" do
+    session.delete(:user_id)
+    redirect "/"
+  end
+
 end
