@@ -38,14 +38,14 @@ class ContactsApp < Sinatra::Base
     redirect "/"
   end
 
-  get "/contact_list" do
-    contact_list = "<ul>"
-    @contact_database.each do |hash|
-      if hash[:user_id] == session[:user_id]
-        contact_list << hash[:]
-      end
-    end
-  end
+  # get "/contact_list" do
+  #   contact_list = "<ul>"
+  #   @contact_database.each do |hash|
+  #     if hash[:user_id] == session[:user_id]
+  #       contact_list << hash[:]
+  #     end
+  #   end
+  # end
 
   get "/log_out" do
     session.delete(:user_id)
