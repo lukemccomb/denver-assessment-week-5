@@ -2,9 +2,11 @@ require "sinatra"
 require "./lib/database"
 require "./lib/contact_database"
 require "./lib/user_database"
+require "rack-flash"
 
 class ContactsApp < Sinatra::Base
   enable :sessions
+  use Rack::Flash
 
   def initialize
     super
@@ -26,6 +28,14 @@ class ContactsApp < Sinatra::Base
 
   get "/log_in" do
     erb :log_in
+  end
+
+  post "/logging_in" do
+    hash = {username: params[:username], password: params[:password]}
+    user_info = @user_database.all.detect { |user_hash| user_hash[:username] == hash[:username] && user_hash[:password] == hash[:password]}
+    session[:user_id] = user_info[:id]
+    flash[:notice] = "Welcome, #{user_info[:username]}"
+    redirect "/"
   end
 
 end
